@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "azkaban.fullname" . }}
+  app: {{ template "azkaban.fullname" . }}
+  namespace: default
+data:
+  azkaban.properties: |-
+    # Azkaban Personalization Settings
+    azkaban.name={{ .Values.az_name }}
+    azkaban.label={{ .Values.az_label | default "Azkaban Solo Server" }}
+    azkaban.color=#FF3601
+    azkaban.default.servlet.path=/index
+    web.resource.dir=web/
+    default.timezone.id=UTC
+    # Azkaban UserManager class
+    user.manager.class={{ .Values.user_manager_class | default "azkaban.user.XmlUserManager" }}
+    # Loader for projects
+    executor.global.properties=conf/global.properties
+    azkaban.project.dir=projects
+
+    {{- if .Values.db.endpoint }}
+    database.type=mysql
+    mysql.port=3306
+    mysql.host={{ .Values.db.endpoint }}
+    mysql.database={{ .Values.db.database }}
+    mysql.user={{ .Values.db.username }}
+    mysql.password=${AZ_DB_PASSOWRD}
+    mysql.numconnections=100
+    {{ else }}
+    database.type=h2
+    h2.path=/h2/h2
+    h2.create.tables=true
+    {{ end }}
+    # Velocity dev mode
+    velocity.dev.mode=false
+    # Azkaban Jetty server properties.
+    jetty.use.ssl=false
+    jetty.maxThreads={{ .Values.jetty.maxThreads }}
+    jetty.port={{ .Values.jetty.port }}
+    # Azkaban Executor settings
+    executor.port=12321
+    {{- if .Values.az_mail.user }}
+    # mail settings
+    mail.sender={{ .Values.az_mail.sender }}
+    mail.port={{ .Values.az_mail.port }}
+    mail.host={{ .Values.az_mail.host }}
+    mail.user={{ .Values.az_mail.user }}
+    mail.password=${AZ_MAIL_PASSOWRD}
+    {{ end }}
+    # mail.password=<CreateOrUseFrom1Pass>
+    # User facing web server configurations used to construct the user facing server URLs. They are useful when there is a rever
+    # enduser -> myazkabanhost:443 -> proxy -> localhost:8081
+    # when this parameters set then these parameters are used to generate email links.
+    # if these parameters are not set then jetty.hostname, and jetty.port(if ssl configured jetty.ssl.port) are used.
+    # azkaban.webserver.external_hostname=myazkabanhost.com
+    # azkaban.webserver.external_ssl_port=443
+    # azkaban.webserver.external_port=8081
+    azkaban.webserver.url=http\://azkaban.{{ .Values.az_name }}.{{ .Values.az_domain }}
+    # Jobs Properties redefined
+    job.log.chunk.size=1024KB
+    job.log.backup.index=2
+    job.failure.email=
+    job.success.email=
+    lockdown.create.projects=false
+    cache.directory=cache
+    flow.num.job.threads={{ .Values.az_flow_num_job_threads }}
+    # JMX stats
+    jetty.connector.stats=true
+    executor.connector.stats=true
+    # Azkaban plugin settings
+    azkaban.jobtype.plugin.dir=plugins/jobtypes
+    {{ if .Values.viewer_plugins  }}
+    viewer.plugins={{ .Values.viewer_plugins | sortAlpha | join "," }}
+    {{ end }}
+    # Number of executions to be displayed
+    azkaban.display.execution_page_size=16
+    azkaban.use.multiple.executors=true
+   # Kafka Settings
+   {{ if .Values.az_kafka_host  }}
+   azkaban.server.logging.kafka.brokerList={{ .Values.az_kafka_host }}
+   {{ end }}
+   {{ if .Values.db.endpoint  }}
+   # Scheduler
+   azkaban.server.schedule.enable_quartz=true
+   azkaban.dependency.plugin.dir=plugins/dependency
+   #
+   org.quartz.dataSource.quartzDS.driver = com.mysql.jdbc.Driver
+   org.quartz.dataSource.quartzDS.URL = jdbc:mysql://{{ .Values.db.endpoint }}:3306/{{ .Values.db.database }}
+   org.quartz.dataSource.quartzDS.user = {{ .Values.db.username }}
+   org.quartz.dataSource.quartzDS.password = ${AZ_DB_PASSWORD}
+   org.quartz.threadPool.threadCount = 3
+   org.quartz.jobStore.class=org.quartz.impl.jdbcjobstore.JobStoreTX
+   org.quartz.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+   org.quartz.jobStore.tablePrefix=QRTZ_
+   org.quartz.jobStore.dataSource=quartzDS
+   {{ end }}

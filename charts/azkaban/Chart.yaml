@@ -1,0 +1,14 @@
+apiVersion: v2
+name: azkaban
+type: application
+version: 0.1.0
+appVersion: "1.16.0"
+description: |
+  A chart to deploy azkaban solo server. Base image includes Kafka, Hadoop and Spark as part of .
+  Will deploy basic azkaban solo-server by default.
+
+  Chart will use values to dynamically configure the server and expand functionality.
+  Supports installation of native and external plugins.
+
+  ```console
+  helm install myenv ./azkaban
