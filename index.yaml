@@ -1,0 +1,18 @@
+apiVersion: v1
+entries:
+  azkaban:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-01-21T02:28:48.870280755Z"
+    description: 'A chart to deploy azkaban solo server. Base image includes Kafka,
+      Hadoop and Spark as part of . Will deploy basic azkaban solo-server by default.  Chart
+      will use values to dynamically configure the server and expand functionality.
+      Supports installation of native and external plugins.  ```console helm install
+      myenv ./azkaban '
+    digest: 1761806c40c7ee8b7cd7684fbbace199ac29531627e8d3815f3878bc4ad2fcf1
+    name: azkaban
+    type: application
+    urls:
+    - https://github.com/bbondarenko/helm-charts/releases/download/azkaban-0.1.0/azkaban-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-01-21T02:28:48.870285755Z"
