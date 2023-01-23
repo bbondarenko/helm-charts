@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "azkaban.fullname" . }}
-  app: {{ template "azkaban.fullname" . }}
+  name: azkaban-users-configmap
   namespace: default
 data:
-  azkaban-users.xml: |-
+  content: |-
     <azkaban-users>
       <role name="admin" permissions="ADMIN" / >
       <group name="admins" roles="admin" / >

@@ -77,6 +77,20 @@ tolerations: []
 
 affinity: {}
 
+volumes:
+  - name: azkaban-users
+    configMap:
+      name: azkaban-users-configmap
+  - name: azkaban.propertie
+    configMap:
+      name: azkaban.propertie-configmap
+volume_mounts:
+  - name: azkaban-users
+    mountPath: /opt/azkaban/conf/azkaban-users.xml
+    subPath: content
+  - name: azkaban.propertie
+    mountPath: /opt/azkaban/conf/azkaban.propertie
+    subPath: content
 # AZ defaults
 user_manager_class: 
 jetty:

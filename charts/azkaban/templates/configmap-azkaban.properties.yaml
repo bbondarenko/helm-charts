@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "azkaban.fullname" . }}
-  app: {{ template "azkaban.fullname" . }}
+  name: azkaban.propertie-configmap
   namespace: default
 data:
-  azkaban.properties: |-
+  content: |-
     # Azkaban Personalization Settings
     azkaban.name={{ .Values.az_name }}
     azkaban.label={{ .Values.az_label | default "Azkaban Solo Server" }}
