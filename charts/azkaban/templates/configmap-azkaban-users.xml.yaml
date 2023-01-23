@@ -6,8 +6,8 @@ metadata:
   namespace: default
 data:
   azkaban-users.xml: |-
-  <azkaban-users>
-    <role name="admin" permissions="ADMIN" / >
-    <group name="admins" roles="admin" / >
-    <user username="azkaban" password="secret"  groups="admins" / >
-  </azkaban-users>
+    <azkaban-users>
+      <role name="admin" permissions="ADMIN" / >
+      <group name="admins" roles="admin" / >
+      <user username="azkaban" password="secret"  groups="admins" / >
+    </azkaban-users>
