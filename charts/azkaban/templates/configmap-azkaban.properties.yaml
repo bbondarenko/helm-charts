@@ -56,7 +56,7 @@ data:
     # azkaban.webserver.external_hostname=myazkabanhost.com
     # azkaban.webserver.external_ssl_port=443
     # azkaban.webserver.external_port=8081
-    azkaban.webserver.url=http\://azkaban.{{ .Values.az_name }}.{{ .Values.az_domain }}
+    azkaban.webserver.url=http\://{{ .Values.az_name }}.{{ .Values.az_domain }}
     # Jobs Properties redefined
     job.log.chunk.size=1024KB
     job.log.backup.index=2
