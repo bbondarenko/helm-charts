@@ -60,3 +60,10 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Get secrets
+*/}}
+{{- define "azkaban.getSecrets" -}}
+ {{- $secretsObj := (lookup "v1" "Secret" .Release.Namespace "") | default dict }}
+{{- end }}

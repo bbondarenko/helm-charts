@@ -24,7 +24,7 @@ data:
     mysql.host={{ .Values.db.endpoint }}
     mysql.database={{ .Values.db.database }}
     mysql.user={{ .Values.db.username }}
-    mysql.password=${AZ_DB_PASSOWRD}
+    mysql.password={{ .Values.db.password }}
     mysql.numconnections=100
     {{ else }}
     database.type=h2
@@ -45,7 +45,7 @@ data:
     mail.port={{ .Values.az_mail.port }}
     mail.host={{ .Values.az_mail.host }}
     mail.user={{ .Values.az_mail.user }}
-    mail.password=${AZ_MAIL_PASSOWRD}
+    mail.password={{ .Values.az_mail.password }}
     {{ end }}
     # mail.password=<CreateOrUseFrom1Pass>
     # User facing web server configurations used to construct the user facing server URLs. They are useful when there is a rever
@@ -87,7 +87,7 @@ data:
    org.quartz.dataSource.quartzDS.driver = com.mysql.jdbc.Driver
    org.quartz.dataSource.quartzDS.URL = jdbc:mysql://{{ .Values.db.endpoint }}:3306/{{ .Values.db.database }}
    org.quartz.dataSource.quartzDS.user = {{ .Values.db.username }}
-   org.quartz.dataSource.quartzDS.password = ${AZ_DB_PASSWORD}
+   org.quartz.dataSource.quartzDS.password = {{ .Values.db.password }}
    org.quartz.threadPool.threadCount = 3
    org.quartz.jobStore.class=org.quartz.impl.jdbcjobstore.JobStoreTX
    org.quartz.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.StdJDBCDelegate

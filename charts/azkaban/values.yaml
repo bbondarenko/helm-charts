@@ -101,6 +101,7 @@ db:
   adminuser: admin
   username: azkaban
   database: azkaban
+  password:
 az_name: k8s
 az_domain: local
 az_flow_num_job_threads: 30
@@ -112,4 +113,4 @@ az_mail:
   port:
   sender:
   host:
-
+  password:
