@@ -3,6 +3,21 @@ entries:
   azkaban:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-01-24T22:05:55.333755057Z"
+    description: 'A chart to deploy azkaban solo server. Base image includes Kafka,
+      Hadoop and Spark as part of . Will deploy basic azkaban solo-server by default.  Chart
+      will use values to dynamically configure the server and expand functionality.
+      Supports installation of native and external plugins.  ```console helm repo
+      add boris-charts https://bbondarenko.github.io/helm-chart helm install myenv
+      boris-charts/azkaban ``` '
+    digest: 740ea51bc61fa962b69283d4993ce39e76e0412582d6e3fb4a71adedcd2571de
+    name: azkaban
+    type: application
+    urls:
+    - https://github.com/bbondarenko/helm-charts/releases/download/azkaban-0.1.4/azkaban-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-01-23T22:55:18.230080348Z"
     description: 'A chart to deploy azkaban solo server. Base image includes Kafka,
       Hadoop and Spark as part of . Will deploy basic azkaban solo-server by default.  Chart
@@ -57,4 +72,4 @@ entries:
     urls:
     - https://github.com/bbondarenko/helm-charts/releases/download/azkaban-0.1.0/azkaban-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-23T22:55:18.230099649Z"
+generated: "2023-01-24T22:05:55.333771757Z"
