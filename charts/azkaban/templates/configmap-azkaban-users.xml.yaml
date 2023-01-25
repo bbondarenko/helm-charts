@@ -6,7 +6,9 @@ metadata:
 data:
   content: |-
     <azkaban-users>
-      <role name="admin" permissions="ADMIN" / >
-      <group name="admins" roles="admin" / >
-      <user username="azkaban" password="secret"  groups="admins" / >
+      <user groups="azkaban" password="azkaban" roles="admin" username="azkaban"/>
+      <user password="metrics" roles="metrics" username="metrics"/>
+    
+      <role name="admin" permissions="ADMIN"/>
+      <role name="metrics" permissions="METRICS"/>
     </azkaban-users>
