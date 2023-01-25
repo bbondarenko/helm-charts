@@ -45,12 +45,8 @@ data:
     mail.port={{ .Values.az_mail.port }}
     mail.host={{ .Values.az_mail.host }}
     mail.user={{ .Values.az_mail.user }}
-    mail.password={{ .Values.az_mail.password }}
+    mail.password={{ (lookup "v1" "Secret" .Release.Namespace "mail-password").data.password | b64dec  }}
     {{ end }}
-    # mail.password=<CreateOrUseFrom1Pass>
-    # User facing web server configurations used to construct the user facing server URLs. They are useful when there is a rever
-    # enduser -> myazkabanhost:443 -> proxy -> localhost:8081
-    # when this parameters set then these parameters are used to generate email links.
     # if these parameters are not set then jetty.hostname, and jetty.port(if ssl configured jetty.ssl.port) are used.
     # azkaban.webserver.external_hostname=myazkabanhost.com
     # azkaban.webserver.external_ssl_port=443
@@ -87,7 +83,7 @@ data:
    org.quartz.dataSource.quartzDS.driver = com.mysql.jdbc.Driver
    org.quartz.dataSource.quartzDS.URL = jdbc:mysql://{{ .Values.db.endpoint }}:3306/{{ .Values.db.database }}
    org.quartz.dataSource.quartzDS.user = {{ .Values.db.username }}
-   org.quartz.dataSource.quartzDS.password = {{ .Values.db.password }}
+   org.quartz.dataSource.quartzDS.password = {{ (lookup "v1" "Secret" .Release.Namespace "db").data.password | b64dec }}
    org.quartz.threadPool.threadCount = 3
    org.quartz.jobStore.class=org.quartz.impl.jdbcjobstore.JobStoreTX
    org.quartz.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.StdJDBCDelegate
