@@ -81,14 +81,14 @@ volumes:
   - name: azkaban-users
     configMap:
       name: azkaban-users-configmap
-  - name: azkaban.propertie
+  - name: azkaban-propertie
     configMap:
       name: azkaban.propertie-configmap
 volume_mounts:
   - name: azkaban-users
     mountPath: /opt/azkaban/conf/azkaban-users.xml
     subPath: content
-  - name: azkaban.propertie
+  - name: azkaban-propertie
     mountPath: /opt/azkaban/conf/azkaban.propertie
     subPath: content
 # AZ defaults
@@ -101,7 +101,6 @@ db:
   adminuser: admin
   username: azkaban
   database: azkaban
-  password:
 az_name: k8s
 az_domain: local
 az_flow_num_job_threads: 30
@@ -113,4 +112,3 @@ az_mail:
   port:
   sender:
   host:
-  password:
