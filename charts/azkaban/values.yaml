@@ -92,6 +92,7 @@ user_manager_class:
 jetty:
   port: 8081
   maxThreads: 25
+# db, mke sure endpoint is defined as host only, no protocol or port spec is allowed
 db: 
   endpoint: 
   adminuser: admin

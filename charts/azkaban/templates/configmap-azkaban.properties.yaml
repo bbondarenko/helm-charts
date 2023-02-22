@@ -81,7 +81,7 @@ data:
     azkaban.server.schedule.enable_quartz=true
     azkaban.dependency.plugin.dir=plugins/dependency
     org.quartz.dataSource.quartzDS.driver=com.mysql.jdbc.Driver
-    org.quartz.dataSource.quartzDS.URL=jdbc:mysql://{{ .Values.db.endpoint }}/{{ .Values.db.database }}
+    org.quartz.dataSource.quartzDS.URL=jdbc:mysql://{{ .Values.db.endpoint }}:3306/{{ .Values.db.database }}
     org.quartz.dataSource.quartzDS.user={{ .Values.db.username }}
     org.quartz.dataSource.quartzDS.password={{- include "getSecrets" (dict "Name" "db" "Namespace" .Release.Namespace "Key" "password") }}
     org.quartz.threadPool.threadCount=3
