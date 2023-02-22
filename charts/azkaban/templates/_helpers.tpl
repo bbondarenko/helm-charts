@@ -64,6 +64,11 @@ Create the name of the service account to use
 {{/*
 Get secrets
 */}}
-{{- define "azkaban.getSecrets" -}}
- {{- $secretsObj := (lookup "v1" "Secret" .Release.Namespace "") | default dict }}
+{{- define "getSecrets" -}}
+ {{- $secretsObj := (lookup "v1" "Secret" .Namespace .Name).data  -}}
+ {{- if $secretsObj }}
+ {{- index $secretsObj .Key | b64dec -}}
+ {{- else -}}
+ {{- default "default" "diff-has-no-values" -}}
+ {{- end -}}
 {{- end }}
