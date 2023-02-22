@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: banzaib/k8s-azkaban
+  repository: banzaib/azkaban-solo
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
